@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchVideos, searchVideos } from '/AIT/Frontend/Project/my-react-app/src/components/Youtube/YoutubeApi';
+import { fetchVideos, searchVideos } from "/AIT/Frontend/Project/my-react-app/vite-project/src/components/Youtube/YoutubeApi";
 
 const LECVideos: React.FC = () => {
   const [videos, setVideos] = useState<any[]>([]);

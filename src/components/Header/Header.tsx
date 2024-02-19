@@ -13,9 +13,9 @@ const Header: React.FC = () => {
         />
       </NavLink>
 
-      <NavLink to="/lec">LEC</NavLink>
-
       <NavLink to="/lck">LCK</NavLink>
+
+      <NavLink to="/lec">LEC</NavLink>
 
       <NavLink to="/prime-league">PrimeLeague</NavLink>
     </div>
