@@ -1,28 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { fetchVideos, searchVideos } from "/AIT/Frontend/Project/my-react-app/vite-project/src/components/Youtube/YoutubeApi";
+import React, { useEffect, useState } from "react";
+import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
+import { fetchLatestVideos } from "/AIT/Frontend/Project/my-react-app/vite-project/src/components/Youtube/YoutubeApi";
 
 const LECVideos: React.FC = () => {
-  const [videos, setVideos] = useState<any[]>([]);
+  const [videoIds, setVideoIds] = useState<string[]>([]);
 
   useEffect(() => {
-    const channelId = 'lolesportsvods';
-    fetchVideos(channelId).then((data) => setVideos(data));
+    const fetchVideos = async () => {
+      const channelId = "UCvqRdlKsE5Q8mf8YXbdIJLw"; 
+      const latestVideos = await fetchLatestVideos(channelId);
+      setVideoIds(latestVideos);
+    };
+
+    fetchVideos();
   }, []);
 
   return (
     <div>
-      <h2>LEC Videos</h2>
+      <h2>LEC/LCS Videos</h2>
       <div>
-        {videos.map((video) => (
-          <li key={video.id.videoId}>
-            <a
-              href={`https://www.youtube.com/watch?v=${video.id.videoId}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {video.snippet.title}
-            </a>
-          </li>
+        {videoIds.map((videoId) => (
+          <VideoPlayer key={videoId} videoId={videoId} />
         ))}
       </div>
     </div>

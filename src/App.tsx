@@ -5,6 +5,8 @@ import LECVideos from "./pages/LEC/LECVideos";
 import LCKVideos from "./pages/LCK/LCKVideos";
 import Home from "./components/Home/Home";
 import Layout from "./components/Layout/Layout";
+import LoginForm from "./components/Login/LoginForm";
+import RegistrationForm from "./components/Registration/RegistrationForm";
 
 const App: React.FC = () => {
   return (
@@ -15,6 +17,8 @@ const App: React.FC = () => {
           <Route path="/lec" element={<LECVideos />} />
           <Route path="/lck" element={<LCKVideos />} />
           <Route path="/prime-league" element={<PrimeLeagueVideos />} />
+          <Route path="/login" element={<LoginForm />} />
+        <Route path="/registration" element={<RegistrationForm />} />
         </Route>
       </Routes>
     </Router>
