@@ -19,22 +19,22 @@ const RegistrationForm: React.FC = () => {
       ) : (
         <form onSubmit={handleSubmit}>
           <h2>Регистрация</h2>
-          <label>
+          <div className="input-container">
             Имя пользователя:
             <input
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
-          </label>
-          <label>
+          </div>
+          <div className="input-container">
             Пароль:
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-          </label>
+          </div>
           <button type="submit">Зарегистрироваться</button>
         </form>
       )}

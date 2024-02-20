@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "/AIT/Frontend/Project/my-react-app/vite-project/src/components/Login/LoginForm.module.css"; // Подключаем файл со стилями
 
 const LoginForm: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -17,29 +18,35 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="form-container">
       {loggedIn ? (
         <p>Вы успешно вошли!</p>
       ) : (
         <form onSubmit={handleSubmit}>
           <h2>Вход</h2>
-          <label>
-            Имя пользователя:
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </label>
-          <label>
-            Пароль:
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
-          <button type="submit">Войти</button>
+          <div className="input-container">
+            <label>
+              Имя пользователя:
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </label>
+          </div>
+          <div className="input-container">
+            <label>
+              Пароль:
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </label>
+          </div>
+          <div className="button-container">
+            <button type="submit">Войти</button>
+          </div>
         </form>
       )}
     </div>

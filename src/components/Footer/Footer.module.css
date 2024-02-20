@@ -1,6 +1,6 @@
 .footer {
-  background-color: black;
-  color: white;
-  padding: 15px;
-  width: 100%;
+  width: 100%; /* Растягиваем футер на всю ширину экрана */
+  background-color: #000000; /* Пример цвета фона */
+  color: white; /* Пример цвета текста */
+  text-align: center; /* Центрируем текст в футере */
 }

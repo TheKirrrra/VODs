@@ -20,7 +20,7 @@ const Layout: FC = () => {
           {showRegistrationForm && <RegistrationForm />}
           <Outlet />
         </main>
-        <Footer />
+        <Footer/>
       </div>
     </AuthContext.Provider>
   );
