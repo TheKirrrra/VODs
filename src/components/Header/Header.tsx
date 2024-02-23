@@ -1,41 +1,28 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import styles from "./Header.module.css";
+import { useAuth } from "../AuthContext/AuthContext"; // Импортируем хук useAuth
+import styles from "./Header.module.css"; // Импортируем стили
 
 const Header: React.FC = () => {
+  const { isLoggedIn, logout } = useAuth(); // Используем хук useAuth для получения статуса аутентификации и функции logout
+
   return (
     <div className={styles.navbar}>
-      <div className={styles["navbar-left"]}>
-        {" "}
-        {/* Контейнер для Home */}
-        <NavLink to="/" className={styles["home-link"]}>
-          {" "}
-          {/* Добавляем класс для стилизации Home */}
-          <img
-            src="https://www.svgrepo.com/show/22031/home-icon-silhouette.svg"
-            alt="Home"
-            style={{ width: "30px", height: "30px" }}
-          />
-        </NavLink>
+      <div>
+        <NavLink to="/" className={styles.navLink}>Home</NavLink> {/* Используем styles.navLink */}
+        <NavLink to="/lck" className={styles.navLink} >LCK</NavLink>
+        <NavLink to="/lec" className={styles.navLink} >LEC/LCS</NavLink>
+        <NavLink to="/prime-league" className={styles.navLink} >Prime League</NavLink>
       </div>
-
-      <div className={styles["navbar-center"]}>
-        {" "}
-        {/* Контейнер для группы ссылок LCK, LEC и Prime League */}
-        <NavLink to="/lck">LCK</NavLink>
-        <NavLink to="/lec">LEC/LCS</NavLink>
-        <NavLink to="/prime-league">Prime League</NavLink>
-      </div>
-
-      <div className={styles["navbar-right"]}>
-        {" "}
-        {/* Контейнер для ссылок авторизации и регистрации */}
-        <div className={styles["auth-links-container"]}>
-          {" "}
-          {/* Добавляем контейнер для ссылок авторизации и регистрации */}
-          <NavLink to="/login">Авторизация</NavLink>
-          <NavLink to="/registration"> Регистрация</NavLink>
-        </div>
+      <div className={styles.authLinksContainer}>
+        {isLoggedIn ? (
+          <button onClick={logout} className={styles.logoutButton}>Logout</button> 
+        ) : (
+          <>
+            <NavLink to="/login" className={styles.authLink}>Login</NavLink>
+            <NavLink to="/registration" className={styles.authLink}>Registration</NavLink>
+          </>
+        )}
       </div>
     </div>
   );

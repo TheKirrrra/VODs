@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 import { fetchLatestVideos } from "/AIT/Frontend/Project/my-react-app/vite-project/src/components/Youtube/YoutubeApi";
+import styles from "./LCKVideos.module.css";
 
 const LCKVideos: React.FC = () => {
   const [allVideos, setAllVideos] = useState<string[]>([]);
@@ -24,14 +25,16 @@ const LCKVideos: React.FC = () => {
 
   return (
     <div>
-      <h2>LCK Videos</h2>
+      <h2 className={styles.centeredHeader}>LCK Videos</h2>
       <div>
         <button onClick={() => handleTabChange('All')}>All</button>
         <button onClick={() => handleTabChange('Highlights')}>Highlights</button>
       </div>
-      <div>
+      <div className={styles.videoGrid}>
         {(selectedTab === 'All' ? allVideos : highlightVideos).map((videoId) => (
-          <VideoPlayer key={videoId} videoId={videoId} />
+          <div key={videoId} className={styles.videoContainer}>
+            <VideoPlayer videoId={videoId} />
+          </div>
         ))}
       </div>
     </div>

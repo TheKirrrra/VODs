@@ -1,0 +1,57 @@
+.navbar {
+    position: sticky;
+    background-color: rgb(199, 199, 199);
+    padding: 5px 5px 5px 5px;
+    display: flex;
+    align-items: center;
+    flex-grow: 0;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .navbar > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    width: 70%; /* 70% ширины для группы элементов LEC, LCK и Prime League */
+  }
+  
+  .navbar > div > a {
+    font-size: larger;
+    text-decoration: none;
+    color: rgb(7, 6, 6);
+    margin-right: 20px; /* Отступ между элементами */
+  }
+  
+  .navbar > div > a:last-child {
+    margin-right: 0; /* Убираем отступ справа у последнего элемента */
+  }
+  
+  .navbar > div > a:hover {
+    text-decoration: underline;
+    color: rgb(255, 255, 255);
+  }
+  
+  .navbar > div > a:global.active {
+    text-decoration: underline;
+    color: rgb(150, 150, 150);
+  }
+  
+  /* Стили для Home */
+  .home-link {
+    width: 10%; /* 10% ширины для элемента Home */
+  }
+  
+  /* Стили для блока авторизации и регистрации */
+  .auth-links-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto; /* Переместить контейнер вправо */
+  }
+  
+  /* Стили для отдельных ссылок авторизации и регистрации */
+  .auth-links > a {
+    margin-top: 10px; /* Отступ между элементами */
+  }
+  

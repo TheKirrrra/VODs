@@ -1,56 +1,55 @@
-import React, { useState } from "react";
-import "/AIT/Frontend/Project/my-react-app/vite-project/src/components/Login/LoginForm.module.css"; // Подключаем файл со стилями
+  import React, { useState } from "react";
+  import axios from "axios";
+  import { useAuth } from "../AuthContext/AuthContext";
 
-const LoginForm: React.FC = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
+  const LoginForm: React.FC = () => {
+    const { login } = useAuth(); // Используем хук useAuth для доступа к функции login
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    const storedUsername = localStorage.getItem("username");
-    const storedPassword = localStorage.getItem("password");
-    if (storedUsername === username && storedPassword === password) {
-      setLoggedIn(true);
-    } else {
-      alert("Неверное имя пользователя или пароль!");
-    }
+    const handleSubmit = async (event: React.FormEvent) => {
+      event.preventDefault();
+      try {
+        const response = await axios.post("https://dummyjson.com/auth/login", {
+          username,
+          password,
+        });
+        if (response.data.token) {
+          localStorage.setItem("token", response.data.token);
+          login(); // Вызываем функцию login после успешного входа
+        } else {
+          setError("Неверное имя пользователя или пароль!");
+        }
+      } catch (error) {
+        console.error("Ошибка при попытке входа:", error);
+        setError("Ошибка при попытке входа");
+      }
+    };
+
+    return (
+      <form onSubmit={handleSubmit}>
+        <h2>Вход</h2>
+        <label>
+          Имя пользователя:
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </label>
+        <label>
+          Пароль:
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
+        <button type="submit">Войти</button>
+        {error && <p>{error}</p>}
+      </form>
+    );
   };
 
-  return (
-    <div className="form-container">
-      {loggedIn ? (
-        <p>Вы успешно вошли!</p>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <h2>Вход</h2>
-          <div className="input-container">
-            <label>
-              Имя пользователя:
-              <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </label>
-          </div>
-          <div className="input-container">
-            <label>
-              Пароль:
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
-          </div>
-          <div className="button-container">
-            <button type="submit">Войти</button>
-          </div>
-        </form>
-      )}
-    </div>
-  );
-};
-
-export default LoginForm;
+  export default LoginForm;

@@ -1,28 +1,51 @@
-import React, { createContext, useState, Dispatch, SetStateAction } from "react";
+import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 interface AuthContextProps {
-  showLoginForm: boolean;
-  showRegistrationForm: boolean;
-  setShowLoginForm: Dispatch<SetStateAction<boolean>>;
-  setShowRegistrationForm: Dispatch<SetStateAction<boolean>>;
+  isLoggedIn: boolean;
+  login: () => void;
+  logout: () => void;
 }
 
-export const AuthContext = createContext<AuthContextProps>({
-  showLoginForm: false,
-  showRegistrationForm: false,
-  setShowLoginForm: () => {},
-  setShowRegistrationForm: () => {},
-});
+const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
-const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [showLoginForm, setShowLoginForm] = useState(false);
-  const [showRegistrationForm, setShowRegistrationForm] = useState(false);
+interface AuthContextProviderProps {
+  children: ReactNode;
+}
+
+export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ children }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+  // Инициализация состояния isLoggedIn из локального хранилища при загрузке компонента
+  useEffect(() => {
+    const storedLoggedIn = localStorage.getItem("isLoggedIn");
+    if (storedLoggedIn) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const login = () => {
+    setIsLoggedIn(true);
+    // Сохранение состояния isLoggedIn в локальное хранилище при входе
+    localStorage.setItem("isLoggedIn", "true");
+  };
+
+  const logout = () => {
+    setIsLoggedIn(false);
+    // Удаление состояния isLoggedIn из локального хранилища при выходе
+    localStorage.removeItem("isLoggedIn");
+  };
 
   return (
-    <AuthContext.Provider value={{ showLoginForm, showRegistrationForm, setShowLoginForm, setShowRegistrationForm }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export default AuthContextProvider;
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthContextProvider");
+  }
+  return context;
+};

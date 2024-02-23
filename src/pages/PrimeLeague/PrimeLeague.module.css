@@ -1,0 +1,16 @@
+.videoGrid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(300px, 1fr)
+  ); /* Ширина столбцов 300px, максимум 1fr */
+  gap: 20px; /* Отступ между видео */
+}
+
+.videoContainer {
+  border: 1px solid #ccc; /* Рамка для видео */
+}
+
+.centeredHeader {
+    text-align: center;
+  }

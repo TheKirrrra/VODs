@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 import { fetchLatestVideos } from "/AIT/Frontend/Project/my-react-app/vite-project/src/components/Youtube/YoutubeApi";
+import styles from "./PrimeLeague.module.css";
 
 const PrimeLeagueVideos: React.FC = () => {
   const [videoIds, setVideoIds] = useState<string[]>([]);
@@ -18,10 +19,12 @@ const PrimeLeagueVideos: React.FC = () => {
 
   return (
     <div>
-      <h2>Prime League Videos</h2>
-      <div>
+      <h2 className={styles.centeredHeader}>Prime League Videos</h2>
+      <div className={styles.videoGrid}>
         {videoIds.map((videoId) => (
-          <VideoPlayer key={videoId} videoId={videoId} />
+          <div key={videoId} className={styles.videoContainer}>
+            <VideoPlayer videoId={videoId} />
+          </div>
         ))}
       </div>
     </div>

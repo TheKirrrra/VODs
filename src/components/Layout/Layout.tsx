@@ -1,28 +1,28 @@
-import { FC, useState } from "react";
+import React from "react";
+import { Outlet, useLocation } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import { Outlet } from "react-router-dom";
 import styles from "./Layout.module.css";
-import LoginForm from "/AIT/Frontend/Project/my-react-app/vite-project/src/components/Login/LoginForm";
-import RegistrationForm from "/AIT/Frontend/Project/my-react-app/vite-project/src/components/Registration/RegistrationForm";
-import { AuthContext } from "/AIT/Frontend/Project/my-react-app/vite-project/src/components/AuthContext/AuthContext";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute"; // Импортируем ProtectedRoute
 
-const Layout: FC = () => {
-  const [showLoginForm, setShowLoginForm] = useState(false);
-  const [showRegistrationForm, setShowRegistrationForm] = useState(false);
+const Layout: React.FC = () => {
+  const location = useLocation();
+  const isAuthPage = location.pathname === "/login" || location.pathname === "/registration";
 
   return (
-    <AuthContext.Provider value={{ showLoginForm, showRegistrationForm, setShowLoginForm, setShowRegistrationForm }}>
-      <div className={styles.container}>
-        <Header />
-        <main className={styles.main}>
-          {showLoginForm && <LoginForm />}
-          {showRegistrationForm && <RegistrationForm />}
-          <Outlet />
-        </main>
-        <Footer/>
-      </div>
-    </AuthContext.Provider>
+    <div className={styles.container}>
+      {isAuthPage ? (
+        <Outlet />
+      ) : (
+        <>
+          <Header />
+          <main className={styles.main}>
+            <ProtectedRoute path="/" element={<Outlet />} /> {/* Здесь используем ProtectedRoute */}
+          </main>
+          <Footer />
+        </>
+      )}
+    </div>
   );
 };
 
