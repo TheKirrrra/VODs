@@ -5,7 +5,7 @@ import axios from "axios";
 const RegistrationForm: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [registered, setRegistered] = useState(false);
+  const [, setRegistered] = useState(false);
   const [error, setError] = useState("");
 
   const handleSubmit = async (event: React.FormEvent) => {
