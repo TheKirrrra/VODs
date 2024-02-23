@@ -9,7 +9,7 @@ const Header: React.FC = () => {
   return (
     <div className={styles.navbar}>
       <div className={styles.navLinks}>
-        <NavLink to="/" className={styles.navLink}>Home</NavLink>
+      <NavLink to="/VODs" className={styles.navLink}>Home</NavLink>
         <NavLink to="/lck" className={styles.navLink}>LCK</NavLink>
         <NavLink to="/lec" className={styles.navLink}>LEC/LCS</NavLink>
         <NavLink to="/prime-league" className={styles.navLink}>Prime League</NavLink>

@@ -1,7 +1,7 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
 import AuthHeader from "../AuthHeader/AuthHeader";
 import AuthFooter from "../AuthFooter/AuthFooter";
+import { Outlet } from "react-router-dom";
 import styles from "./AuthLayout.module.css";
 
 const AuthLayout: React.FC = () => {
