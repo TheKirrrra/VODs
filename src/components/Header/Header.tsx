@@ -1,22 +1,26 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useAuth } from "../AuthContext/AuthContext"; // Импортируем хук useAuth
-import styles from "./Header.module.css"; // Импортируем стили
+import { useAuth } from "../AuthContext/AuthContext";
+import styles from "./Header.module.css";
 
 const Header: React.FC = () => {
-  const { isLoggedIn, logout } = useAuth(); // Используем хук useAuth для получения статуса аутентификации и функции logout
+  const { isLoggedIn, logout } = useAuth();
 
   return (
     <div className={styles.navbar}>
-      <div>
-        <NavLink to="/" className={styles.navLink}>Home</NavLink> {/* Используем styles.navLink */}
-        <NavLink to="/lck" className={styles.navLink} >LCK</NavLink>
-        <NavLink to="/lec" className={styles.navLink} >LEC/LCS</NavLink>
-        <NavLink to="/prime-league" className={styles.navLink} >Prime League</NavLink>
+      <div className={styles.navLinks}>
+        <NavLink to="/" className={styles.navLink}>Home</NavLink>
+        <NavLink to="/lck" className={styles.navLink}>LCK</NavLink>
+        <NavLink to="/lec" className={styles.navLink}>LEC/LCS</NavLink>
+        <NavLink to="/prime-league" className={styles.navLink}>Prime League</NavLink>
       </div>
       <div className={styles.authLinksContainer}>
         {isLoggedIn ? (
-          <button onClick={logout} className={styles.logoutButton}>Logout</button> 
+          <>
+            <div className={styles.logoutButtonContainer}>
+              <button onClick={logout} className={styles.logoutButton}>Logout</button>
+            </div>
+          </>
         ) : (
           <>
             <NavLink to="/login" className={styles.authLink}>Login</NavLink>

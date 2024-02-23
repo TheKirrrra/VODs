@@ -3,11 +3,11 @@ import { Outlet, useLocation } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import styles from "./Layout.module.css";
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute"; // Импортируем ProtectedRoute
 
 const Layout: React.FC = () => {
   const location = useLocation();
-  const isAuthPage = location.pathname === "/login" || location.pathname === "/registration";
+  const isAuthPage =
+    location.pathname === "/login" || location.pathname === "/registration";
 
   return (
     <div className={styles.container}>
@@ -17,7 +17,7 @@ const Layout: React.FC = () => {
         <>
           <Header />
           <main className={styles.main}>
-            <ProtectedRoute path="/" element={<Outlet />} /> {/* Здесь используем ProtectedRoute */}
+            <Outlet /> {/* Здесь убираем использование ProtectedRoute */}
           </main>
           <Footer />
         </>

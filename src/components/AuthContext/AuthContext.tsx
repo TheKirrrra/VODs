@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
+
 interface AuthContextProps {
   isLoggedIn: boolean;
   login: () => void;
@@ -24,9 +25,11 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
   }, []);
 
   const login = () => {
+    
     setIsLoggedIn(true);
     // Сохранение состояния isLoggedIn в локальное хранилище при входе
     localStorage.setItem("isLoggedIn", "true");
+    
   };
 
   const logout = () => {

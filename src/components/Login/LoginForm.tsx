@@ -1,55 +1,45 @@
-  import React, { useState } from "react";
-  import axios from "axios";
-  import { useAuth } from "../AuthContext/AuthContext";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-  const LoginForm: React.FC = () => {
-    const { login } = useAuth(); // Используем хук useAuth для доступа к функции login
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+const LoginPage: React.FC = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-    const handleSubmit = async (event: React.FormEvent) => {
-      event.preventDefault();
-      try {
-        const response = await axios.post("https://dummyjson.com/auth/login", {
-          username,
-          password,
-        });
-        if (response.data.token) {
-          localStorage.setItem("token", response.data.token);
-          login(); // Вызываем функцию login после успешного входа
-        } else {
-          setError("Неверное имя пользователя или пароль!");
-        }
-      } catch (error) {
-        console.error("Ошибка при попытке входа:", error);
-        setError("Ошибка при попытке входа");
-      }
-    };
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // Перенаправляем пользователя на защищенную страницу
+    navigate('/');
+  };
 
-    return (
+  return (
+    <div>
+      <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <h2>Вход</h2>
-        <label>
-          Имя пользователя:
+        <div>
+          <label htmlFor="username">Username:</label>
           <input
+            id="username"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
           />
-        </label>
-        <label>
-          Пароль:
+        </div>
+        <div>
+          <label htmlFor="password">Password:</label>
           <input
+            id="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
-        </label>
-        <button type="submit">Войти</button>
-        {error && <p>{error}</p>}
+        </div>
+        <button type="submit">Sign in</button>
       </form>
-    );
-  };
+    </div>
+  );
+};
 
-  export default LoginForm;
+export default LoginPage;
