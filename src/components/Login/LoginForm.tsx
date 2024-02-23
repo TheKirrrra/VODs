@@ -45,7 +45,7 @@ const LoginPage: React.FC = () => {
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="username">Username(kminchelle):</label>
           <input
             id="username"
             type="text"
@@ -55,7 +55,7 @@ const LoginPage: React.FC = () => {
           />
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password">Password(0lelplR):</label>
           <input
             id="password"
             type="password"
