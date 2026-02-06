@@ -1,0 +1,73 @@
+VODs Project Documentation
+Overview
+VODs is a React application built with TypeScript and Vite, providing a modern development experience with fast refresh and type safety.
+
+Technology Stack
+
+React - UI library for building user interfaces
+TypeScript - Typed superset of JavaScript
+Vite - Fast build tool and dev server with HMR
+ESLint - Code quality and style linter
+npm - Package manager
+
+Project Structure
+
+VODs/
+├── src/              # Application source code
+├── public/           # Static assets
+├── node_modules/     # Dependencies
+├── package.json      # npm configuration
+├── tsconfig.json     # TypeScript configuration
+├── vite.config.ts    # Vite configuration
+└── eslint.config.js  # ESLint configuration
+
+Installation & Running
+
+Install Dependencies
+npm install
+
+Development Mode
+npm run dev
+
+Production Build
+npm run build
+
+Preview Production Build
+npm run preview
+
+Configuration Features
+
+Hot Module Replacement (HMR)
+
+The project uses HMR for instant updates without page reload during development.
+
+Vite Plugins
+
+Two official plugins are available:
+
+@vitejs/plugin-react - uses Babel for Fast Refresh
+@vitejs/plugin-react-swc - uses SWC for faster Fast Refresh
+
+Development Guidelines
+
+ESLint Configuration
+
+For production applications, consider:
+
+Enabling type-aware TypeScript rules
+Configuring parserOptions with tsconfig paths
+Using strict presets like plugin:@typescript-eslint/recommended-type-checked
+Adding eslint-plugin-react for React-specific rules
+
+Component Structure
+
+Place components in src/components/
+Use TypeScript for all files (.tsx, .ts)
+Follow functional components pattern with hooks
+Adhere to ESLint rules
+
+Git Repository
+
+Repository: https://github.com/TheKirrrra/VODs
+Current Branch: main
+Remote: origin
